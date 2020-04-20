@@ -45,6 +45,13 @@ func main() {
 		r.HTML(200, "index", nil)
 	})
 
+	if os.Getenv("REDIS_URL") != "" {
+		fmt.Println("REDIS_URL:", os.Getenv("REDIS_URL"))
+	}
+	if os.Getenv("SCALINGO_REDIS_URL") != "" {
+		fmt.Println("SCALINGO_REDIS_URL:", os.Getenv("SCALINGO_REDIS_URL"))
+	}
+
 	if os.Getenv("PANIC") == "true" {
 		panic("this is crashing")
 	}
