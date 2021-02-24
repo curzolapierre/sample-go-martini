@@ -66,9 +66,11 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Fprintf(os.Stderr, "CRASHING !!! (stderr)\n")
-	fmt.Fprintf(os.Stdout, "CRASHING !!! (stdout)\n")
-	os.Exit(1)
+	if os.Getenv("CRASHING") != "" {
+		fmt.Fprintf(os.Stderr, "CRASHING !!! (stderr)\n")
+		fmt.Fprintf(os.Stdout, "CRASHING !!! (stdout)\n")
+		os.Exit(1)
+	}
 
 	go http.Serve(listener, m)
 	log.Println("Listening on 0.0.0.0:" + port)
