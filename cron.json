@@ -1,0 +1,8 @@
+{
+    "jobs": [
+        {
+            "command": "*/10 * * * * dbclient-fetcher psql && psql $SCALINGO_POSTGRESQL_URL -c \"\\l\"",
+            "size": "S"
+        }
+    ]
+}
