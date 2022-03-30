@@ -66,14 +66,15 @@ func main() {
 		panic(err)
 	}
 
+	go http.Serve(listener, m)
+	log.Println("Listening on 0.0.0.0:" + port)
+
 	if os.Getenv("CRASHING") == "" {
+		time.Sleep(5 * time.Second)
 		fmt.Fprintf(os.Stderr, "CRASHING !!! (stderr)\n")
 		fmt.Fprintf(os.Stdout, "CRASHING !!! (stdout)\n")
 		os.Exit(1)
 	}
-
-	go http.Serve(listener, m)
-	log.Println("Listening on 0.0.0.0:" + port)
 
 	sigs := make(chan os.Signal)
 	signal.Notify(sigs, syscall.SIGTERM)
