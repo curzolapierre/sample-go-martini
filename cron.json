@@ -1,0 +1,8 @@
+{
+    "jobs": [
+        {
+            "command": "*/2 * * * * date && exit 1",
+            "size": "S"
+        }
+    ]
+}
