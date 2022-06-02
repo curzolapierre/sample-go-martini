@@ -1,7 +1,7 @@
 {
     "jobs": [
         {
-            "command": "*/2 * * * * date && exit 1",
+            "command": "* * * * * date",
             "size": "S"
         }
     ]
