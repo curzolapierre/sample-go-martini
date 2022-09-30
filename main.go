@@ -46,7 +46,7 @@ func main() {
 	})
 
 	if os.Getenv("PANIC") == "true" {
-		panic("this is crashing")
+		panic("this is crashing..")
 	}
 
 	port := "3000"
