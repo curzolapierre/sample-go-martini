@@ -49,6 +49,10 @@ func main() {
 		panic("this is crashing")
 	}
 
+	fmt.Println("===============")
+	fmt.Println(" TESTING HERE")
+	fmt.Println("===============")
+
 	port := "3000"
 	if os.Getenv("PORT") != "" {
 		port = os.Getenv("PORT")
