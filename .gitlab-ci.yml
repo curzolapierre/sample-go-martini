@@ -1,7 +1,39 @@
+# This file is a template, and might need editing before it works on your project.
+# You can copy and paste this template into a new `.gitlab-ci.yml` file.
+# You should not add this template to an existing `.gitlab-ci.yml` file by using the `include:` keyword.
+#
+# To contribute improvements to CI/CD templates, please follow the Development guide at:
+# https://docs.gitlab.com/ee/development/cicd/templates.html
+# This specific template is located at:
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Go.gitlab-ci.yml
+
+image: golang:latest
+
+stages:
+  - test
+  - build
+  - deploy
+
+format:
+  stage: test
+  script:
+    - go fmt $(go list ./... | grep -v /vendor/)
+    - go vet $(go list ./... | grep -v /vendor/)
+    - go test -race $(go list ./... | grep -v /vendor/)
+
+compile:
+  stage: build
+  script:
+    - mkdir -p mybinaries
+    - go build -o mybinaries ./...
+  artifacts:
+    paths:
+      - mybinaries
+
 deploy:development:
   stage: deploy
   variables:
-    SCALINGO_APP_NAME: <app name>
+    SCALINGO_APP_NAME: sample-go-martini-1
     SCALINGO_REGION: osc-fr1
     GIT_DEPTH: 0
   image: ruby:latest
@@ -10,3 +42,8 @@ deploy:development:
   script:
     - gem install dpl --pre
     - dpl --provider=scalingo --app=$SCALINGO_APP_NAME --api-token=$SCALINGO_API_TOKEN --region=$SCALINGO_REGION --branch=refs/heads/master
+
+deploy:
+  stage: deploy
+  script: echo "Define your deployment script!"
+  environment: production
