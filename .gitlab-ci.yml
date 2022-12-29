@@ -22,7 +22,7 @@ compile:
     paths:
       - mybinaries
 
-deploy:development:
+deploy:
   stage: deploy
   variables:
     SCALINGO_APP_NAME: sample-go-martini-1
@@ -34,8 +34,3 @@ deploy:development:
   script:
     - gem install dpl --pre
     - dpl --provider=scalingo --app=$SCALINGO_APP_NAME --api-token=$SCALINGO_API_TOKEN --region=$SCALINGO_REGION --branch=refs/heads/master
-
-deploy:
-  stage: deploy
-  script: echo "Define your deployment script!"
-  environment: production
