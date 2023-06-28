@@ -6,7 +6,7 @@
   "website": "https://scalingo.com",
   "formation": {
     "web": {
-      "test": "M"
+      "size": "test"
     }
   }
 }
