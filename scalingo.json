@@ -4,9 +4,7 @@
   "logo": "https://scalingo.com/logo.svg",
   "repository": "https://github.com/Scalingo/sample-go-martini",
   "website": "https://scalingo.com",
-  "formation": {
-    "web": {
-      "amount": 1
-    }
+  "scripts": {
+    "first-deploy": "echo 'first deployment'"
   }
 }
