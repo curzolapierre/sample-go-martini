@@ -12,7 +12,7 @@
   },
   "addons": [
     {
-      "plan": "toto",
+      "plan": "",
       "options": {
         "version": "4.0.16-1"
       }
