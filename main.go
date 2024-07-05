@@ -42,6 +42,7 @@ func main() {
 			val, _ := strconv.Atoi(req.URL.Query().Get("prime"))
 			log.Printf("Is %d prime: %t", val, isPrime(val))
 		}
+		r.Header().Add("Transfer-Encoding", "chunked")
 		r.HTML(200, "index", nil)
 	})
 
@@ -61,6 +62,13 @@ func main() {
 
 	go http.Serve(listener, m)
 	log.Println("Listening on 0.0.0.0:" + port)
+
+	go func() {
+		for {
+			log.Println("TEST_VARIABLE:", os.Getenv("TEST_VARIABLE"))
+			time.Sleep(10 * time.Second)
+		}
+	}()
 
 	sigs := make(chan os.Signal)
 	signal.Notify(sigs, syscall.SIGTERM)
