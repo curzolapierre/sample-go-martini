@@ -42,7 +42,9 @@ func main() {
 			val, _ := strconv.Atoi(req.URL.Query().Get("prime"))
 			log.Printf("Is %d prime: %t", val, isPrime(val))
 		}
-		r.Header().Add("Transfer-Encoding", "chunked")
+		r.Header().Add("strict-transport-security", "max-age=31536000")
+		r.Header().Add("includeSubDomains", "true")
+		r.Header().Add("preload", "true")
 		r.HTML(200, "index", nil)
 	})
 
@@ -64,10 +66,10 @@ func main() {
 	log.Println("Listening on 0.0.0.0:" + port)
 
 	go func() {
-		for {
-			log.Println("TEST_VARIABLE:", os.Getenv("TEST_VARIABLE"))
-			time.Sleep(10 * time.Second)
-		}
+		// for {
+		// 	log.Println("TEST_VARIABLE:", os.Getenv("TEST_VARIABLE"))
+		// 	time.Sleep(10 * time.Second)
+		// }
 	}()
 
 	sigs := make(chan os.Signal)
