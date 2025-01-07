@@ -32,6 +32,11 @@ func main() {
 		},
 	))
 
+	m.Get("/ping", func(r render.Render, _ *http.Request) {
+		r.JSON(200, map[string]interface{}{"message": "pong"})
+		fmt.Println("pong")
+	})
+
 	m.Get("/", func(r render.Render, req *http.Request) {
 		if req.URL.Query().Get("wait") != "" {
 			sleep, _ := strconv.Atoi(req.URL.Query().Get("wait"))
@@ -59,6 +64,11 @@ func main() {
 	port := "3000"
 	if os.Getenv("PORT") != "" {
 		port = os.Getenv("PORT")
+	}
+
+	// port can be passed as an argument
+	if len(os.Args) > 1 {
+		port = os.Args[1]
 	}
 
 	listener, err := net.Listen("tcp", ":"+port)
