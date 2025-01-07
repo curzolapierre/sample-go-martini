@@ -34,7 +34,7 @@ func main() {
 
 	m.Get("/ping", func(r render.Render, _ *http.Request) {
 		r.JSON(200, map[string]interface{}{"message": "pong"})
-		fmt.Println("pong")
+		fmt.Printf("[%v] pong\n", os.Getenv("PORT"))
 	})
 
 	m.Get("/", func(r render.Render, req *http.Request) {
