@@ -1,1 +1,1 @@
-web: ./test.sh & sample-go-martini & ./test.sh 3030 2 & sample-go-martini 3030
+web: bin/run & PORT=3001 sample-go-martini & PORT=3002 sample-go-martini
