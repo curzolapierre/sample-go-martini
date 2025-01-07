@@ -61,13 +61,13 @@ func main() {
 		time.Sleep(time.Duration(startTimeout) * time.Second)
 	}
 
-	port := "3000"
+	port := "3001"
 	if os.Getenv("PORT") != "" {
 		port = os.Getenv("PORT")
 	}
 
-	// port can be passed as an argument
 	if len(os.Args) > 1 {
+		fmt.Printf("Using port from argument: %s\n", os.Args[1])
 		port = os.Args[1]
 	}
 
