@@ -51,7 +51,7 @@ func main() {
 	})
 
 	if os.Getenv("PANIC") == "true" {
-		panic("this is crashing")
+		panic("this is crashing..")
 	}
 
 	if os.Getenv("SLOW_START") != "" {
