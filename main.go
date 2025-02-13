@@ -50,7 +50,7 @@ func main() {
 		r.HTML(200, "index", nil)
 	})
 
-	if os.Getenv("PANIC") == "true" {
+	if os.Getenv("PANIC") != "true" {
 		panic("this is crashing")
 	}
 
