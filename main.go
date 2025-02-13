@@ -50,15 +50,14 @@ func main() {
 		r.HTML(200, "index", nil)
 	})
 
-	if os.Getenv("PANIC") == "true" {
-		panic("this is crashing")
-	}
-
 	if os.Getenv("SLOW_START") != "" {
 		startTimeout, _ := strconv.Atoi(os.Getenv("SLOW_START"))
 
 		log.Printf("Sleeping for %v seconds to simulate slow start\n", startTimeout)
 		time.Sleep(time.Duration(startTimeout) * time.Second)
+		if os.Getenv("PANIC") != "true" {
+			panic("this is crashing")
+		}
 	}
 
 	port := "3001"
