@@ -1,4 +1,4 @@
-{
+{test]
   "name": "Sample Go Martini",
   "description": "Sample web application using the Go framework Martini",
   "logo": "https://scalingo.com/logo.svg",
