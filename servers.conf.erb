@@ -1,18 +1,17 @@
 server {
     listen <%= ENV['PORT'] %>;
-    server_name localhost;
 
-    charset utf-8;
     location / {
-        return 404;
+        proxy_pass http://127.0.0.1:3001/;
     }
 }
 
 # Domain-based routing
 server {
     listen <%= ENV['PORT'] %>;
-    server_name tutu.curzola.me;
+    server_name <%= ENV['DOMAIN_A'] %>;
     location / {
+        proxy_buffering on;
         proxy_pass http://127.0.0.1:3001;
         proxy_redirect default;
         proxy_set_header Host $host;
@@ -23,8 +22,9 @@ server {
 
 server {
     listen <%= ENV['PORT'] %>;
-    server_name titi.curzola.me;
+    server_name <%= ENV['DOMAIN_B'] %>;
     location / {
+        proxy_buffering off;
         proxy_pass http://127.0.0.1:3002;
         proxy_redirect default;
         proxy_set_header Host $host;

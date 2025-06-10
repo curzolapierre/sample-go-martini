@@ -24,6 +24,43 @@ func isPrime(value int) bool {
 	return value > 1
 }
 
+func streamFunc(w http.ResponseWriter, r *http.Request, buffered bool) {
+	w.Header().Set("Content-Type", "text/plain")
+	w.Header().Set("Transfer-Encoding", "chunked")
+	w.Header().Set("Cache-Control", "no-cache")
+	if buffered {
+		w.Header().Set("X-Accel-Buffering", "yes")
+	} else {
+		w.Header().Set("X-Accel-Buffering", "no")
+	}
+
+	flusher, ok := w.(http.Flusher)
+	if !ok {
+		http.Error(w, "Streaming not supported", http.StatusInternalServerError)
+		return
+	}
+
+	// Stream data in chunks
+	for i := 1; i <= 10; i++ {
+		select {
+		case <-r.Context().Done():
+			return
+		default:
+			fmt.Fprintf(w, "chunk %d\n", i)
+			flusher.Flush() // Send chunk immediately
+			time.Sleep(1 * time.Second)
+		}
+	}
+}
+
+func stream(w http.ResponseWriter, r *http.Request) {
+	streamFunc(w, r, false)
+}
+
+func streamBuffered(w http.ResponseWriter, r *http.Request) {
+	streamFunc(w, r, true)
+}
+
 func main() {
 	m := martini.Classic()
 	m.Use(render.Renderer(
@@ -49,6 +86,9 @@ func main() {
 		}
 		r.HTML(200, "index", nil)
 	})
+
+	m.Get("/stream", stream)
+	m.Get("/stream-buffered", streamBuffered)
 
 	if os.Getenv("PANIC") == "true" {
 		panic("this is crashing")
