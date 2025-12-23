@@ -1,0 +1,47 @@
+# Node modules
+node_modules/
+
+# Dependency directories
+vendor/
+bower_components/
+
+# Build output
+dist/
+build/
+out/
+tmp/
+temp/
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment files
+.env
+.env.*
+
+# Go build artifacts
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Coverage files
+coverage/
+*.coverprofile
+
+# Slug specific
+.git/
+.gitignore
+slugignore
