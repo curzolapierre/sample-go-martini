@@ -9,5 +9,13 @@
       "amount": 1,
       "size": "S"
     }
-  }
+  },
+  "addons": [
+    {
+      "plan": "",
+      "options": {
+        "version": "4.0.16-1"
+      }
+    }
+  ]
 }
